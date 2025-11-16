@@ -5,6 +5,13 @@ To analyse the stability of the system having open loop transfer function, G(S)=
 Computer with MATLAB software
 
 ## Theory:
+![5](https://github.com/user-attachments/assets/d5bf8c94-91fd-4cac-bf07-4eb45a144f4b)
+![6](https://github.com/user-attachments/assets/b25e0e42-2614-4469-b434-1040fa4862b8)
+![7](https://github.com/user-attachments/assets/a030a22b-45a7-4620-85f5-ccc78f46a10b)
+
+
+
+
 
 
 
@@ -17,13 +24,34 @@ Computer with MATLAB software
 	Also determine the stability.
 
 ## Program: 
+```
+num=[1]
+den=[conv(1,0),conv(1,0.5),conv(1,0.2)]
+sys=tf(num,den)
+w=logspace(-1,2,1000)
+[mag phase]=bode(sys,w)
+mag=squeeze(mag)
+phase=squeeze(phase)
+theta=deg2rad(phase)
+polarplot(theta,mag,'LineWidth',1.5)
+[gm pm wpc wgc]=margin(sys)
+if (wpc>wgc)
+    disp('stable')
+elseif (wpc==wgc)
+    disp('marginally stable')
+else
+    disp('unstable')
+end
+```
 
 ## Output:
+<img width="1920" height="1080" alt="Screenshot 2025-11-16 143302" src="https://github.com/user-attachments/assets/4cc0edf0-2dc0-4f64-9e0a-775c53c9c287" />
+
 
 ## Result:
 Thus the polar plot for the given transfer function was drawn and verified using MATLAB. <br>
-Gain margin = <br>
-Phase Margin = <br>
-Gain crossover frequency = <br>
-Phase crossover frequency = <br>
-The system is  ------------
+Gain margin =infinity <br>
+Phase Margin =101.53 degree <br>
+Gain crossover frequency =1.95 rad/s<br>
+Phase crossover frequency =NaN<br>
+The system is unstable
